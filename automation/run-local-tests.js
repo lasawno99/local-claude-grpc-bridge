@@ -5,8 +5,10 @@ import { sendTelegramMessage } from "./telegram.js";
 const checks = [
   ["server syntax", process.execPath, ["--check", "server/index.js"]],
   ["anthropic adapter syntax", process.execPath, ["--check", "server/anthropicClient.js"]],
+  ["openai adapter syntax", process.execPath, ["--check", "server/openaiClient.js"]],
   ["grpc server syntax", process.execPath, ["--check", "server/grpcServer.js"]],
   ["grpc client syntax", process.execPath, ["--check", "client/index.js"]],
+  ["provider router syntax", process.execPath, ["--check", "automation/ai-provider.js"]],
   ["ui-tars runner syntax", process.execPath, ["--check", "automation/ui-tars-runner.js"]],
   ["telegram bot syntax", process.execPath, ["--check", "automation/telegram-bot.js"]],
   ["token optimizer config", process.execPath, ["automation/token-optimizer-config.js"]],

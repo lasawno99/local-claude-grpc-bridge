@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { spawn } from "node:child_process";
-import { generateWithClaude } from "../server/anthropicClient.js";
+import { generateWithSelectedProvider, getAiProviderName } from "./ai-provider.js";
 import { sendTelegramMessage, telegramConfigured } from "./telegram.js";
 
 if (!telegramConfigured()) {
@@ -98,11 +98,11 @@ async function sendTypingAction(chatId) {
   }).catch(() => {});
 }
 
-async function replyWithClaude(chatId, text) {
+async function replyWithAi(chatId, text) {
   appendConversation(chatId, "user", text);
   await sendTypingAction(chatId);
 
-  const result = await generateWithClaude({
+  const result = await generateWithSelectedProvider({
     prompt: buildPrompt(chatId, text),
     system: chatSystemPrompt
   });
@@ -114,7 +114,7 @@ async function replyWithClaude(chatId, text) {
   }
 }
 
-console.log("Telegram bot polling. Send /status, /test, /reset, or any normal message.");
+console.log("Telegram bot polling. Send /status, /provider, /test, /reset, or any normal message.");
 
 while (true) {
   try {
@@ -134,6 +134,11 @@ while (true) {
         continue;
       }
 
+      if (text === "/provider") {
+        await sendTelegramMessage(`Current AI provider: ${getAiProviderName()}`, { chatId });
+        continue;
+      }
+
       if (text === "/test") {
         await sendTelegramMessage("Running local automation tests...", { chatId });
         const result = await runAutomationTests();
@@ -150,7 +155,7 @@ while (true) {
       }
 
       if (text && !text.startsWith("/")) {
-        await replyWithClaude(chatId, text);
+        await replyWithAi(chatId, text);
         continue;
       }
     }
