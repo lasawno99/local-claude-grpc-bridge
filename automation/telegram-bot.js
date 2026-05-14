@@ -10,7 +10,7 @@ if (!telegramConfigured()) {
 
 let offset = 0;
 const conversations = new Map();
-const maxHistoryMessages = Number(process.env.TELEGRAM_CHAT_HISTORY_LIMIT || 8);
+const maxHistoryMessages = Number(process.env.TELEGRAM_CHAT_HISTORY_LIMIT || 20);
 const chatSystemPrompt =
   process.env.TELEGRAM_CHAT_SYSTEM_PROMPT ||
   "You are a helpful, friendly assistant chatting in Telegram. Keep replies concise unless the user asks for detail.";

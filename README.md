@@ -129,7 +129,7 @@ Any non-command text is forwarded to the selected AI provider and answered as a 
 
 ```env
 TELEGRAM_AI_PROVIDER=anthropic
-TELEGRAM_CHAT_HISTORY_LIMIT=8
+TELEGRAM_CHAT_HISTORY_LIMIT=20
 TELEGRAM_CHAT_SYSTEM_PROMPT=You are a helpful, friendly assistant chatting in Telegram. Keep replies concise unless the user asks for detail.
 ```
 
