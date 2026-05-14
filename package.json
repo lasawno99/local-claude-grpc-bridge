@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server/index.js",
     "dev": "node server/index.js",
@@ -13,6 +16,7 @@
     "gui:test:live": "UI_TARS_ENABLE_LIVE=true node automation/ui-tars-runner.js",
     "telegram:test": "node automation/telegram-test.js",
     "telegram:bot": "node automation/telegram-bot.js",
+    "railway:start": "node automation/telegram-bot.js",
     "token-optimizer:start": "token-optimizer-mcp",
     "token-optimizer:config": "node automation/token-optimizer-config.js"
   },
@@ -27,6 +31,6 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "uuid": "^14.0.0",
-    "zod": "^4.4.3"
+    "zod": "^3.25.76"
   }
 }
