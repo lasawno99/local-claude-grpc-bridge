@@ -6,6 +6,8 @@ const checks = [
   ["server syntax", process.execPath, ["--check", "server/index.js"]],
   ["anthropic adapter syntax", process.execPath, ["--check", "server/anthropicClient.js"]],
   ["openai adapter syntax", process.execPath, ["--check", "server/openaiClient.js"]],
+  ["openrouter adapter syntax", process.execPath, ["--check", "server/openrouterClient.js"]],
+  ["openrouter adapter import", process.execPath, ["-e", "import('./server/openrouterClient.js')"]],
   ["grpc server syntax", process.execPath, ["--check", "server/grpcServer.js"]],
   ["grpc client syntax", process.execPath, ["--check", "client/index.js"]],
   ["provider router syntax", process.execPath, ["--check", "automation/ai-provider.js"]],

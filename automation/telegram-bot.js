@@ -143,6 +143,8 @@ function buildDebugMessage() {
     `anthropic_model=${status.anthropicModel}`,
     `openai_key=${status.openaiConfigured ? "set" : "missing"}`,
     `openai_model=${status.openaiModel}`,
+    `openrouter_key=${status.openrouterConfigured ? "set" : "missing"}`,
+    `openrouter_model=${status.openrouterModel}`,
     `chat_history_limit=${maxHistoryMessages}`
   ].join("\n");
 }

@@ -20,11 +20,13 @@
     "@grpc/grpc-js": "^1.10.9",
     "@grpc/proto-loader": "^0.7.13",
     "@ooples/token-optimizer-mcp": "^5.0.1",
+    "@openrouter/agent": "^0.5.0",
     "@ui-tars/operator-nut-js": "^1.2.3",
     "@ui-tars/sdk": "^1.2.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "uuid": "^14.0.0"
+    "uuid": "^14.0.0",
+    "zod": "^4.4.3"
   }
 }

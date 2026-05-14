@@ -142,6 +142,15 @@ OPENAI_MAX_OUTPUT_TOKENS=1024
 OPENAI_API_URL=https://api.openai.com/v1/responses
 ```
 
+Set `TELEGRAM_AI_PROVIDER=openrouter` to use OpenRouter's agent SDK with tool support. OpenRouter requires:
+
+```env
+OPENROUTER_API_KEY=sk-or-your-openrouter-key-here
+OPENROUTER_MODEL=anthropic/claude-sonnet-4
+```
+
+The OpenRouter adapter includes a sample `get_weather` tool using `@openrouter/agent` and `zod`.
+
 ## Automation checks
 
 Run all local smoke checks:
