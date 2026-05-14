@@ -1,5 +1,7 @@
 # Local Claude gRPC Bridge
 
+Local Claude gRPC bridge with UI automation and Telegram alerts.
+
 This scaffold runs a local frontend, HTTP backend, gRPC server, and gRPC client on your machine. The local gRPC server forwards generation requests to Anthropic's Claude Messages API over HTTP.
 
 It uses runtime proto loading through Node dependencies, so no global `protoc` compiler is required.
