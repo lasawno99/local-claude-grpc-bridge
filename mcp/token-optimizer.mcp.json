@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "token-optimizer": {
+      "command": "node",
+      "args": [
+        "./node_modules/@ooples/token-optimizer-mcp/dist/server/index.js"
+      ]
+    }
+  }
+}

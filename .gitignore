@@ -1,0 +1,6 @@
+node_modules/
+.env
+*.log
+automation/latest-*.json
+frontend-smoke.png
+gstack/

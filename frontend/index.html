@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Local gRPC Model Bridge</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace">
+        <div class="intro">
+          <p class="eyebrow">Local model bridge</p>
+          <h1>Send prompts through your local backend</h1>
+          <p>
+            The browser talks to this machine over HTTP. The backend then calls the local
+            gRPC service, which forwards requests to Claude over HTTP.
+          </p>
+        </div>
+
+        <form id="prompt-form" class="composer">
+          <label for="prompt">Prompt</label>
+          <textarea id="prompt" name="prompt" rows="7" placeholder="Ask the remote model something..."></textarea>
+          <button type="submit">Generate</button>
+        </form>
+
+        <section class="result" aria-live="polite">
+          <p class="result-label">Response</p>
+          <pre id="output">Waiting for a prompt.</pre>
+        </section>
+      </section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

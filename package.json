@@ -1,0 +1,29 @@
+{
+  "name": "local-grpc-model-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "client": "node client/index.js",
+    "test:automation": "node automation/run-local-tests.js",
+    "gui:test": "node automation/ui-tars-runner.js",
+    "gui:test:live": "UI_TARS_ENABLE_LIVE=true node automation/ui-tars-runner.js",
+    "telegram:test": "node automation/telegram-test.js",
+    "telegram:bot": "node automation/telegram-bot.js",
+    "token-optimizer:start": "token-optimizer-mcp",
+    "token-optimizer:config": "node automation/token-optimizer-config.js"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.9",
+    "@grpc/proto-loader": "^0.7.13",
+    "@ooples/token-optimizer-mcp": "^5.0.1",
+    "@ui-tars/operator-nut-js": "^1.2.3",
+    "@ui-tars/sdk": "^1.2.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "uuid": "^14.0.0"
+  }
+}
