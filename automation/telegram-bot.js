@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { spawn } from "node:child_process";
-import { generateWithSelectedProvider, getAiProviderName } from "./ai-provider.js";
+import { generateWithSelectedProvider, getAiProviderName, getAiProviderStatus } from "./ai-provider.js";
 import { sendTelegramMessage, telegramConfigured } from "./telegram.js";
 
 if (!telegramConfigured()) {
@@ -102,10 +102,29 @@ async function replyWithAi(chatId, text) {
   appendConversation(chatId, "user", text);
   await sendTypingAction(chatId);
 
-  const result = await generateWithSelectedProvider({
-    prompt: buildPrompt(chatId, text),
-    system: chatSystemPrompt
-  });
+  let result;
+
+  try {
+    result = await generateWithSelectedProvider({
+      prompt: buildPrompt(chatId, text),
+      system: chatSystemPrompt
+    });
+  } catch (error) {
+    console.error(error.message);
+    await sendTelegramMessage(
+      `I reached the bot, but the AI provider failed: ${error.message}\n\nSend /debug to check provider configuration.`,
+      { chatId }
+    );
+    return;
+  }
+
+  if (!result.text?.trim()) {
+    await sendTelegramMessage(
+      `I reached ${getAiProviderName()}, but it returned an empty response. Send /debug to check provider configuration.`,
+      { chatId }
+    );
+    return;
+  }
 
   appendConversation(chatId, "assistant", result.text);
 
@@ -114,7 +133,21 @@ async function replyWithAi(chatId, text) {
   }
 }
 
-console.log("Telegram bot polling. Send /status, /provider, /test, /reset, or any normal message.");
+function buildDebugMessage() {
+  const status = getAiProviderStatus();
+
+  return [
+    "Bot debug:",
+    `provider=${status.provider}`,
+    `anthropic_key=${status.anthropicConfigured ? "set" : "missing"}`,
+    `anthropic_model=${status.anthropicModel}`,
+    `openai_key=${status.openaiConfigured ? "set" : "missing"}`,
+    `openai_model=${status.openaiModel}`,
+    `chat_history_limit=${maxHistoryMessages}`
+  ].join("\n");
+}
+
+console.log("Telegram bot polling. Send /status, /provider, /debug, /test, /reset, or any normal message.");
 
 while (true) {
   try {
@@ -136,6 +169,11 @@ while (true) {
 
       if (text === "/provider") {
         await sendTelegramMessage(`Current AI provider: ${getAiProviderName()}`, { chatId });
+        continue;
+      }
+
+      if (text === "/debug") {
+        await sendTelegramMessage(buildDebugMessage(), { chatId });
         continue;
       }
 

@@ -121,6 +121,7 @@ Supported bot commands:
 
 - `/status` replies that the local bot is running.
 - `/provider` replies with the active AI provider.
+- `/debug` reports provider configuration without exposing secrets.
 - `/test` runs the local automation checks and sends the result back to Telegram.
 - `/reset` clears the in-memory chat history for the current bot process.
 
