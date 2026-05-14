@@ -121,6 +121,14 @@ Supported bot commands:
 
 - `/status` replies that the local bot is running.
 - `/test` runs the local automation checks and sends the result back to Telegram.
+- `/reset` clears the in-memory chat history for the current bot process.
+
+Any non-command text is forwarded to Claude and answered as a normal chat message. Configure the chat behavior with:
+
+```env
+TELEGRAM_CHAT_HISTORY_LIMIT=8
+TELEGRAM_CHAT_SYSTEM_PROMPT=You are a helpful, friendly assistant chatting in Telegram. Keep replies concise unless the user asks for detail.
+```
 
 ## Automation checks
 
