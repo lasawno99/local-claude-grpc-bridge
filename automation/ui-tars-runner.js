@@ -1,7 +1,5 @@
 import "dotenv/config";
 import { writeFile } from "node:fs/promises";
-import { GUIAgent } from "@ui-tars/sdk";
-import { NutJSOperator } from "@ui-tars/operator-nut-js";
 import { sendTelegramMessage } from "./telegram.js";
 
 const liveMode = process.env.UI_TARS_ENABLE_LIVE === "true";
@@ -30,7 +28,7 @@ async function runDryMode() {
     mode: "dry-run",
     instruction,
     message:
-      "UI-TARS dependencies loaded. Set UI_TARS_ENABLE_LIVE=true to let it control the GUI."
+      "UI-TARS runner loaded. Set UI_TARS_ENABLE_LIVE=true to load UI-TARS and control the GUI."
   };
 
   await writeReport(report);
@@ -40,6 +38,11 @@ async function runDryMode() {
 
 async function runLiveMode() {
   requireLiveConfig();
+
+  const [{ GUIAgent }, { NutJSOperator }] = await Promise.all([
+    import("@ui-tars/sdk"),
+    import("@ui-tars/operator-nut-js")
+  ]);
 
   const events = [];
   const abortController = new AbortController();
